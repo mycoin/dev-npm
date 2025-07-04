@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm -r dev",
+    "build": "pnpm -r build"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "packageManager": "pnpm@10.12.2"
+}

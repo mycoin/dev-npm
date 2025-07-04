@@ -1,0 +1,27 @@
+{
+    "name": "@mycoin/node-utils",
+    "version": "0.0.1",
+    "description": "Node常用工具",
+    "main": "dist/index.js",
+    "module": "dist/index.esm.js",
+    "typings": "typings/index.d.ts",
+    "scripts": {
+        "dev": "bundle-scripts dev --target=node",
+        "build": "bundle-scripts build --target=node",
+        "prepublishOnly": "npm run build"
+    },
+    "files": [
+        "dist",
+        "typings",
+        "package.json"
+    ],
+    "publishConfig": {
+        "access": "public"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@types/node": "^24.0.3",
+        "bundle-scripts": "^0.3.26",
+        "typescript": "^5.8.3"
+    }
+}

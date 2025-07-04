@@ -1,0 +1,11 @@
+.main {
+    background: url("./img/ai.png") no-repeat 20px center;
+    background-size: contain;
+    background-color: hsl(245, 86%, 90%);
+    border: 1px solid hsl(230, 86%, 67%);
+    padding: 10px 110px;
+
+    .git {
+        color: red;
+    }
+}

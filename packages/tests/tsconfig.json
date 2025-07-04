@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "jsx": "react-jsx",
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "lib": [
+            "DOM",
+            "ESNext"
+        ],
+        "types": [
+            "@mycoin/bin"
+        ]
+    },
+    "include": [
+        "src"
+    ]
+}

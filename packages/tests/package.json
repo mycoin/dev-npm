@@ -1,0 +1,11 @@
+{
+    "version": "0.4.2",
+    "private": true,
+    "scripts": {
+        "dev": "dev-bin dev --port=4444 --production --sourcemap --open --cssExtract",
+        "build": "dev-bin build"
+    },
+    "dependencies": {
+        "@mycoin/bin": "^0.0.1"
+    }
+}
