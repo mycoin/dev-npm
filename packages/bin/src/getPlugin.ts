@@ -4,7 +4,7 @@ import { pluginSass } from '@rsbuild/plugin-sass'
 import { pluginSvelte } from '@rsbuild/plugin-svelte'
 import { pluginLess } from '@rsbuild/plugin-less'
 import { pluginVue } from '@rsbuild/plugin-vue'
-import { isInstalled } from '@mycoin/node-utils'
+import { requireResolve } from '@mycoin/node-utils'
 
 import { pluginEjs } from "./includes/ejs"
 import { pluginCssModules } from "./includes/cssModules"
@@ -29,15 +29,15 @@ export default (config: CommandOptions): RsbuildPlugins => {
         }))
     }
     // 如果项目中安装了 svelte，就添加 svelte 插件
-    if (isInstalled("svelte", root)) {
+    if (requireResolve("svelte", root)) {
         results.push(pluginSvelte())
     }
     // 如果项目中安装了 react，就添加 react 插件
-    if (isInstalled('react', root)) {
+    if (requireResolve('react', root)) {
         results.push(pluginReact())
     }
     // 如果项目中安装了 vue，就添加 vue 插件
-    if (isInstalled('vue', root)) {
+    if (requireResolve('vue', root)) {
         results.push(pluginVue())
     }
     return results

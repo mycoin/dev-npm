@@ -1,7 +1,7 @@
-import { coerceToTypeOf, parseArgs } from "@mycoin/node-utils";
+import { parseArgs } from "@mycoin/node-utils";
 import { CommandArgs, CommandName, CommandParsed } from "./interfaces";
 import { loadEnv } from "@rsbuild/core";
-import { getModeName } from "./util";
+import { coerce, getModeName } from "./util";
 
 const buildModeArgs: CommandArgs = {
     // 项目根文件夹位置
@@ -61,6 +61,12 @@ const envNameMapper: Record<string, keyof CommandArgs> = {
     PUBLIC_ASSET_PREFIX: "assetPrefix",
     // 是否需要释放样式文件
     PUBLIC_CSS_EXTRACT: "cssExtract",
+    // 是否生成资源清单文件
+    PUBLIC_MANIFEST: "manifest",
+    // 是否自动生成样式模块申明
+    PUBLIC_TYPED_CSS_MODULES: "typedCssModules",
+    // 页面渲染模板
+    PUBLIC_HTML: "html"
 }
 
 const cleanAndAdjust = (params: CommandArgs) => {
@@ -74,8 +80,8 @@ const cleanAndAdjust = (params: CommandArgs) => {
     }
 }
 
-export default (args: [CommandName, ...string[]]): CommandParsed => {
-    const [commandName, ...otherArgs] = args
+export default (argv: [CommandName, ...string[]]): CommandParsed => {
+    const [commandName, ...args] = argv
     const mapper: Record<CommandName, CommandArgs> = {
         build: buildModeArgs,
         dev: {
@@ -83,34 +89,32 @@ export default (args: [CommandName, ...string[]]): CommandParsed => {
             ...devModeExtra,
         },
     }
-    // 这里复制一份配置
-    const params = {
-        ...mapper[commandName]
-    }
 
-    const { values, valueParsed } = parseArgs<CommandArgs>(otherArgs, params)
-    const mode = getModeName(values.production)
+    // 这里复制一份配置
+    const params = { ...mapper[commandName] }
+    // 解析用户输入的参数
+    const { result, options } = parseArgs({
+        args,
+        defaults: params,
+        strict: true,
+    })
+    const mode = getModeName(result.production)
     const { rawPublicVars } = loadEnv({
         mode,
-        cwd: values.root,
+        cwd: result.root,
     })
-
     // 使用环境变量替换默认值
     for (const k in rawPublicVars) {
         if (!envNameMapper[k]) {
             continue
         }
         Object.assign(params, {
-            [envNameMapper[k]]: coerceToTypeOf(rawPublicVars[k], params[envNameMapper[k]])
+            [envNameMapper[k]]: coerce(rawPublicVars[k], params[envNameMapper[k]])
         })
     }
     // 用参数解析结果覆盖最终值
-    Object.keys(params).forEach((keyName) => {
-        if (keyName in valueParsed) {
-            params[keyName] = valueParsed[keyName]
-        }
-    })
-
+    Object.assign(params, options)
+    // 微调参数准确性
     cleanAndAdjust(params)
     return {
         commandName,

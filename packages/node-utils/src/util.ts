@@ -1,4 +1,8 @@
-export default <T>(target: unknown, sample: T): T => {
+export const toCamelCase = (str: string): string => {
+    return str.replace(/-([a-z])/g, (_, char) => char.toUpperCase())
+}
+
+export const coerceAs = <T>(target: unknown, sample: T): T => {
     switch (typeof sample) {
         case "number":
             return Number(target) as T;
@@ -13,4 +17,4 @@ export default <T>(target: unknown, sample: T): T => {
         default:
             return target as T;
     }
-};
+}

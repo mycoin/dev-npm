@@ -38,12 +38,12 @@ export default (commandParsed: CommandParsed): CommandOptions => {
         html: getHtmlOption(html),
         // 全局替换变量定义
         defines: {
-            // 应用版本号
-            APP_VERSION: version,
             // 最近构建时间
-            APP_BUILD_TIME: new Date().toISOString(),
-            // 构建模式
-            MODE: mode,
+            BUILD_TIME: new Date().toISOString(),
+            // 是否生产环境
+            PRODUCTION: production,
+            // 应用版本号
+            VERSION: version,
             // 只能加载公开变量
             ...rawPublicVars,
         },

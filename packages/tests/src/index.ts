@@ -13,6 +13,5 @@ import("./pages/home").then((home) => {
 })
 
 console.error("renderFile", renderFile);
-console.error(import.meta.PRODUCTION);
-console.error(import.meta.VERSION);
+console.error(import.meta.BUILD_TIME);
 

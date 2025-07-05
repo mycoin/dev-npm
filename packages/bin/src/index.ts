@@ -7,6 +7,7 @@ declare global {
     interface ImportMeta {
         readonly VERSION: string
         readonly PRODUCTION: string
+        readonly BUILD_TIME: string
         readonly [k: string]: string
     }
 }

@@ -1,80 +1,74 @@
-import { PrimitiveKV, Primitive, ParseArgsResult } from "./interfaces";
+import { KV } from "./interface"
+import { coerceAs, toCamelCase } from "./util"
 
-export default function <D extends PrimitiveKV = {}>(
-    argv: string[],
-    defaults: D
-): ParseArgsResult<D> {
-    const result: Record<string, Primitive> = {};
-    const valueParsed: Record<string, Primitive> = {};
-    const positionals: string[] = [];
+export type ParsedArgs<T extends KV> = {
+    options: KV
+    positional: string[]
+    result: T
+}
 
-    const types: Record<string, string> = {};
-    const setValue = (k: string, v: Primitive) => {
-        result[k] = v;
-        valueParsed[k] = v;
+export type ParseArgsParam<T extends KV> = {
+    args: string[]
+    defaults?: T
+    strict?: boolean
+}
+
+export default <T extends KV>(params: ParseArgsParam<T>): ParsedArgs<T> => {
+    const { args, defaults, strict } = params
+    const paramArgs = [...args]
+    const options: KV = {}
+    const result = {
+        ...defaults,
     }
 
-    const toCamelCase = (key: string): string => {
-        return key.replace(/[-_]+(\w)/g, (_, c) => c.toUpperCase());
-    }
-
-    for (const key in defaults) {
-        const camelKey = toCamelCase(key);
-
-        types[camelKey] = typeof defaults[key];
-        result[camelKey] = defaults[key];
-    }
-
-    for (let i = 0; i < argv.length; i++) {
-        const arg = argv[i];
-
-        if (!arg.startsWith('-')) {
-            positionals.push(arg);
-            continue;
+    const positional: string[] = []
+    const set = (k: string, v: unknown) => {
+        if (k in defaults) {
+            v = coerceAs(v, defaults[k])
+            Object.assign(result, {
+                [k]: v
+            })
+        } else if (strict || k in options) {
+            throw new TypeError("unknown args `" + k + "`")
         }
+        options[k] = v as any
+    }
 
-        let key: string;
-        let value: any;
+    while (paramArgs.length > 0) {
+        const arg = paramArgs.shift()!
 
+        if (!arg.startsWith('--')) {
+            positional.push(arg)
+            continue
+        }
         if (arg.startsWith('--no-')) {
-            key = toCamelCase(arg.slice(5));
-            setValue(key, false)
-            continue;
+            const key = toCamelCase(arg.slice(5))
+            set(key, false)
+            continue
         }
-        if (arg.startsWith('--')) {
-            const eqIdx = arg.indexOf('=');
-            const expectedType = types[key];
+        const eqIndex = arg.indexOf('=')
+        if (eqIndex !== -1) {
+            const rawKey = arg.slice(2, eqIndex)
+            const key = toCamelCase(rawKey)
+            const value = arg.slice(eqIndex + 1).replace(/^['"]|['"]$/g, '') // 去除包裹的引号
 
-            if (eqIdx !== -1) {
-                key = toCamelCase(arg.slice(2, eqIdx));
-                value = arg.slice(eqIdx + 1);
-            } else {
-                key = toCamelCase(arg.slice(2));
-                const next = argv[i + 1];
-                if (next && !next.startsWith('-')) {
-                    value = next;
-                    i++;
-                } else {
-                    value = true;
-                }
-            }
-            if (expectedType === 'boolean') {
-                setValue(key, value === 'false' ? false : Boolean(value))
-            } else if (expectedType === 'number') {
-                setValue(key, Number(value))
-            } else {
-                setValue(key, value)
-            }
+            set(key, value)
+            continue
+        }
+        const rawKey = arg.slice(2)
+        const key = toCamelCase(rawKey)
+
+        if (paramArgs.length > 0 && !paramArgs[0].startsWith('--')) {
+            const value = paramArgs.shift()!
+            set(key, value.replace(/^['"]|['"]$/g, ''))
+        } else {
+            set(key, true)
         }
     }
-    for (const k in result) {
-        if (typeof defaults[k] === "undefined") {
-            delete result[k]
-        }
-    }
+
     return {
-        values: result as ParseArgsResult<D>['values'],
-        valueParsed,
-        positionals,
-    };
+        options,
+        result,
+        positional
+    }
 }

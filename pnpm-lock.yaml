@@ -11,7 +11,7 @@ importers:
   packages/bin:
     dependencies:
       '@mycoin/node-utils':
-        specifier: ^0.0.1
+        specifier: ^0.0.2
         version: link:../node-utils
       '@rsbuild/core':
         specifier: ^1.4.2
@@ -67,6 +67,16 @@ importers:
         version: 5.8.3
 
   packages/node-utils:
+    dependencies:
+      chalk:
+        specifier: ^5.4.1
+        version: 5.4.1
+      ejs:
+        specifier: ^3.1.10
+        version: 3.1.10
+      git-rev-sync:
+        specifier: ^3.0.2
+        version: 3.0.2
     devDependencies:
       '@types/node':
         specifier: ^24.0.3
@@ -82,7 +92,7 @@ importers:
     dependencies:
       '@mycoin/bin':
         specifier: ^0.0.1
-        version: link:../bin
+        version: 0.0.1(@swc/helpers@0.5.17)(@types/node@24.0.10)(typescript@5.8.3)
 
 packages:
 
@@ -720,6 +730,13 @@ packages:
 
   '@module-federation/webpack-bundler-runtime@0.15.0':
     resolution: {integrity: sha512-i+3wu2Ljh2TmuUpsnjwZVupOVqV50jP0ndA8PSP4gwMKlgdGeaZ4VH5KkHAXGr2eiYUxYLMrJXz1+eILJqeGDg==}
+
+  '@mycoin/bin@0.0.1':
+    resolution: {integrity: sha512-kKlLW6cfDJiwcfacrvVFCoNK6uBu7fdgbil65IqlyooonCWpPphujdUfZ+TNwWZSkO8LFEzS0rueRgxy013FFg==}
+    hasBin: true
+
+  '@mycoin/node-utils@0.0.1':
+    resolution: {integrity: sha512-fwS8lScJgJDB0+fqnINT/dEvPRIfW5ai9Xrx87bQj8grN8p7OwNJGx9FUVeVeBxa5/CgoybYexnOqGjWSTITgw==}
 
   '@napi-rs/wasm-runtime@0.2.11':
     resolution: {integrity: sha512-9DPkXtvHydrcOsopiYpUgPHpmj0HWZKMUnL2dZqpvC42lsratuBG06V5ipyno0fUek5VlFsNQ+AcFATSrJXgMA==}
@@ -1362,6 +1379,10 @@ packages:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
 
+  chalk@5.4.1:
+    resolution: {integrity: sha512-zgVZuo2WcZgfUEmsn6eO3kINexW8RAE4maiQ8QNs8CtpPCSyMiYsULR3HQYkm3w8FIA3SberyMJMSldGsW+U3w==}
+    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
@@ -1728,6 +1749,9 @@ packages:
     resolution: {integrity: sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==}
     engines: {node: 6.* || 8.* || >= 10.*}
 
+  git-rev-sync@3.0.2:
+    resolution: {integrity: sha512-Nd5RiYpyncjLv0j6IONy0lGzAqdRXUaBctuGBbrEA2m6Bn4iDrN/9MeQTXuiquw8AEKL9D2BW0nw5m/lQvxqnQ==}
+
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
     engines: {node: '>= 6'}
@@ -1751,6 +1775,9 @@ packages:
 
   globs@0.1.4:
     resolution: {integrity: sha512-D23dWbOq48vlOraoSigbcQV4tWrnhwk+E/Um2cMuDS3/5dwGmdFeA7L/vAvDhLFlQOTDqHcXh35m/71g2A2WzQ==}
+
+  graceful-fs@4.1.15:
+    resolution: {integrity: sha512-6uHUhOPEBgQ24HM+r6b/QwWfZq+yiFcipKFrOFiBEnWdy5sdzYoi+pJeQaPI5qOLRFqWmAXUPQNsielzdLoecA==}
 
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
@@ -1814,6 +1841,10 @@ packages:
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
+
+  interpret@1.4.0:
+    resolution: {integrity: sha512-agE4QfB2Lkp9uICn7BAqoscw4SZP9kTE2hxiFI3jBPmXJfdqiahTbUuKGsMoN2GtqL9AxhYioAcVvgsb1HvRbA==}
+    engines: {node: '>= 0.10'}
 
   is-arrayish@0.2.1:
     resolution: {integrity: sha512-zz06S8t0ozoDXMG+ube26zeCTNXcKIPJZJi8hBrF4idCLms4CG9QtK7qBl1boi5ODzFpjswb5JPmHCbMpjaYzg==}
@@ -2448,6 +2479,10 @@ packages:
     resolution: {integrity: sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg==}
     engines: {node: '>= 14.18.0'}
 
+  rechoir@0.6.2:
+    resolution: {integrity: sha512-HFM8rkZ+i3zrV+4LQjwQ0W+ez98pApMGM3HUrN04j3CqzPOzl9nmP15Y8YXNm8QHGv/eacOVEjqhmWpkRV0NAw==}
+    engines: {node: '>= 0.10'}
+
   reduce-configs@1.1.0:
     resolution: {integrity: sha512-DQxy6liNadHfrLahZR7lMdc227NYVaQZhY5FMsxLEjX8X0SCuH+ESHSLCoz2yDZFq1/CLMDOAHdsEHwOEXKtvg==}
 
@@ -2704,6 +2739,11 @@ packages:
   shebang-regex@3.0.0:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
+
+  shelljs@0.8.5:
+    resolution: {integrity: sha512-TiwcRcrkhHvbrZbnRcFYMLl30Dfov3HKqzp5tO5b4pt6G/SezKcYhmDg15zXVBswHmctSAQKznqNW2LO5tTDow==}
+    engines: {node: '>=4'}
+    hasBin: true
 
   signal-exit@3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
@@ -3895,6 +3935,45 @@ snapshots:
       '@module-federation/runtime': 0.15.0
       '@module-federation/sdk': 0.15.0
 
+  '@mycoin/bin@0.0.1(@swc/helpers@0.5.17)(@types/node@24.0.10)(typescript@5.8.3)':
+    dependencies:
+      '@mycoin/node-utils': 0.0.1
+      '@rsbuild/core': 1.4.3
+      '@rsbuild/plugin-less': 1.2.4(@rsbuild/core@1.4.3)
+      '@rsbuild/plugin-react': 1.3.3(@rsbuild/core@1.4.3)
+      '@rsbuild/plugin-sass': 1.3.2(@rsbuild/core@1.4.3)
+      '@rsbuild/plugin-svelte': 1.0.10(@babel/core@7.28.0)(@rsbuild/core@1.4.3)(postcss-load-config@3.1.4(postcss@8.5.6)(ts-node@10.9.2(@types/node@24.0.10)(typescript@5.8.3)))(postcss@8.5.6)(sass@1.89.2)(svelte@5.35.2)(typescript@5.8.3)
+      '@rsbuild/plugin-vue': 1.1.0(@rsbuild/core@1.4.3)(@vue/compiler-sfc@3.5.17)
+      '@rspack/core': 1.4.3(@swc/helpers@0.5.17)
+      '@vue/compiler-sfc': 3.5.17
+      ejs: 3.1.10
+      fs-extra: 11.3.0
+      ts-node: 10.9.2(@types/node@24.0.10)(typescript@5.8.3)
+      typed-css-modules: 0.9.1
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@swc/core'
+      - '@swc/helpers'
+      - '@swc/wasm'
+      - '@types/node'
+      - coffeescript
+      - esbuild
+      - less
+      - postcss
+      - postcss-load-config
+      - pug
+      - sass
+      - stylus
+      - sugarss
+      - svelte
+      - typescript
+      - uglify-js
+      - vue
+      - webpack-cli
+      - webpack-hot-middleware
+
+  '@mycoin/node-utils@0.0.1': {}
+
   '@napi-rs/wasm-runtime@0.2.11':
     dependencies:
       '@emnapi/core': 1.4.3
@@ -4589,6 +4668,8 @@ snapshots:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
 
+  chalk@5.4.1: {}
+
   chokidar@3.6.0:
     dependencies:
       anymatch: 3.1.3
@@ -4954,6 +5035,12 @@ snapshots:
 
   get-caller-file@2.0.5: {}
 
+  git-rev-sync@3.0.2:
+    dependencies:
+      escape-string-regexp: 1.0.5
+      graceful-fs: 4.1.15
+      shelljs: 0.8.5
+
   glob-parent@5.1.2:
     dependencies:
       is-glob: 4.0.3
@@ -4985,6 +5072,8 @@ snapshots:
   globs@0.1.4:
     dependencies:
       glob: 7.2.3
+
+  graceful-fs@4.1.15: {}
 
   graceful-fs@4.2.11: {}
 
@@ -5039,6 +5128,8 @@ snapshots:
       wrappy: 1.0.2
 
   inherits@2.0.4: {}
+
+  interpret@1.4.0: {}
 
   is-arrayish@0.2.1: {}
 
@@ -5637,6 +5728,10 @@ snapshots:
 
   readdirp@4.1.2: {}
 
+  rechoir@0.6.2:
+    dependencies:
+      resolve: 1.22.10
+
   reduce-configs@1.1.0: {}
 
   regenerate-unicode-properties@10.2.0:
@@ -5893,6 +5988,12 @@ snapshots:
       shebang-regex: 3.0.0
 
   shebang-regex@3.0.0: {}
+
+  shelljs@0.8.5:
+    dependencies:
+      glob: 7.2.3
+      interpret: 1.4.0
+      rechoir: 0.6.2
 
   signal-exit@3.0.7: {}
 

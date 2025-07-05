@@ -2,7 +2,7 @@
     "version": "0.4.2",
     "private": true,
     "scripts": {
-        "dev": "dev-bin dev --port=4444 --production --sourcemap --open --cssExtract",
+        "dev": "dev-bin dev --port=4444 --out-dir='a b c' --sourceMap --open --cssExtract",
         "build": "dev-bin build"
     },
     "dependencies": {

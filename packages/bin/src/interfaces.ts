@@ -1,6 +1,6 @@
 import { Mode } from '@rspack/core'
-import { Primitive } from '@mycoin/node-utils'
 import { HtmlConfig, ProxyOptions, RsbuildEntry, RsbuildTarget } from '@rsbuild/core'
+import { KV } from '@mycoin/node-utils'
 
 export type CommandArgs = {
     // 项目根文件夹位置
@@ -67,7 +67,7 @@ export type CommandOptions = Omit<CommandArgs, "html"> & {
         }
     }
     // 全局替换变量定义
-    defines: Record<string, Primitive>
+    defines: KV
     // 前置引导文件
     preprend?: string
     // 构建入口配置

@@ -1,14 +1,7 @@
-import coerceToTypeOf from "./coerceToTypeOf"
-import isInstalled from "./isInstalled"
-import parseArgs from "./parseArgs"
-import promiseSeries from "./promiseSeries"
-import readdirRecursivelySync from "./readdirRecursivelySync"
+export { default as chalk } from 'chalk'
+export { default as parseArgs } from './parseArgs'
+export { default as requireResolve } from './requireResolve'
+export { default as deepReadSync‌ } from './deepReadSync‌'
+export { default as getUsageLine } from './getUsageLine'
 
-export type * from './interfaces'
-export {
-    coerceToTypeOf,
-    isInstalled,
-    parseArgs,
-    promiseSeries,
-    readdirRecursivelySync,
-}
+export type * from './interface'

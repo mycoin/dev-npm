@@ -1,6 +1,6 @@
 {
     "name": "@mycoin/node-utils",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "Node常用工具",
     "main": "dist/index.js",
     "module": "dist/index.esm.js",
@@ -12,13 +12,18 @@
     },
     "files": [
         "dist",
+        "src",
         "typings",
         "package.json"
     ],
     "publishConfig": {
         "access": "public"
     },
-    "dependencies": {},
+    "dependencies": {
+        "chalk": "^5.4.1",
+        "ejs": "^3.1.10",
+        "git-rev-sync": "^3.0.2"
+    },
     "devDependencies": {
         "@types/node": "^24.0.3",
         "bundle-scripts": "^0.3.26",
